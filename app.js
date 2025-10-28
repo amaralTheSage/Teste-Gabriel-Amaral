@@ -1,42 +1,46 @@
-var express = require('express');
-var bodyParser = require('body-parser');
-var app = express();
+/* Modificações:
+    1. Atualizei o método de importação para o ES Modules
+    2. Removi bodyParser, cuja função agora é incluída no express
+    3. Jade serve para renderizar templates .jade ou .pug em HTML. Como o app não consta com esses templates, removi o código referente à Jade;
+    4. Removi a função express.static(), que não tinha utilidade neste contexto;
+    5. Optei por usar parâmetros de rota no DELETE e PUT, ao invés de valores de query;
+*/
 
-var teste1 = require("./teste1");
-var teste2 = require("./teste2");
-var teste3 = require("./teste3");
-var teste4 = require("./teste4");
-var teste5 = require("./teste5");
+import express from "express";
 
+import * as teste1 from "./testes/teste1.js";
+import teste2 from "./testes/teste2.js";
+import teste3 from "./testes/teste3.js";
+import teste4 from "./testes/teste4.js";
+import teste5 from "./testes/teste5.js";
 
-app.set('view engine', 'jade');
+const app = express();
 
 app.use(express.json());
-app.use(express.urlencoded());
+app.use(express.urlencoded({ extended: true }));
 
-app.use(bodyParser.json());                        
-app.use(bodyParser.urlencoded({ extended: true }));
-
-app.use(express.static(__dirname + '/public'));
-
-app.get('/', function(req, res){
-  res.send(`get user/ </br>
-  get users/ </br>
-  post users/ </br>
-  delete users/ </br>
-  put users/ </br>
+app.get("/", (req, res) => {
+  res.send(`
+    <ul>
+      <li>GET /user</li>
+      <li>GET /users</li>
+      <li>POST /users</li>
+      <li>DELETE /users</li>
+      <li>PUT /users</li>
+      <li>GET /users/access</li>
+    </ul>
   `);
 });
 
 app.get("/user", teste1.getUser);
 app.get("/users", teste1.getUsers);
-app.post("/users", teste2)
-app.delete("/users", teste3)
-app.put("/users", teste4)
+
+app.post("/users", teste2);
+
+app.delete("/users/:id", teste3);
+
+app.put("/users/:id", teste4);
+
 app.get("/users/access", teste5);
 
-
-const port  = 3000;
-app.listen(port, function(){
-  console.log('Express server listening on port ' + port);
-});
+app.listen(3000, () => console.log("🚀 Server on http://localhost:3000"));
