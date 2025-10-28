@@ -9,13 +9,13 @@ export default function (req, res) {
 
   const index = data.findIndex((u) => u.id === id);
 
-  console.log(id, index);
-
   if (index === -1) {
     return res.status(404).json({ message: "Usuário não encontrado" });
   }
 
   data.splice(index, 1);
 
-  res.send(`Usuário com ID ${id} removido com sucesso`);
+  res
+    .status(200)
+    .json({ message: `Usuário com ID ${id} removido com sucesso` });
 }

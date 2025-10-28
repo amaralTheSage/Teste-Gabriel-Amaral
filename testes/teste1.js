@@ -10,7 +10,7 @@ export function getUser(req, res, next) {
   const name = req.query.name;
   const user = data.find((u) => u.name === name);
 
-  if (user) return res.send(user);
+  if (user) return res.status(200).json({ message: user });
 
   res.status(404).send({ message: "Usuário não encontrado" });
 }

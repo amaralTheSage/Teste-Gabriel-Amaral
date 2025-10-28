@@ -1,11 +1,19 @@
 import data from "../fakeData.js";
 
 export default function (req, res) {
-  var id = req.query.id;
+  const id = Number(req.params.id);
+  const { name, job } = req.body;
 
-  const reg = data.find((d) => id == id);
-  reg.name = req.body.name;
-  reg.job = req.body.job;
+  const user = data.find((u) => u.id === id);
 
-  res.send(reg);
+  console.log(user);
+
+  if (!user) {
+    return res.status(404).json({ message: "User not found" });
+  }
+
+  if (name) user.name = name;
+  if (job) user.job = job;
+
+  res.status(200).json({ message: `User updated successfully` });
 }
