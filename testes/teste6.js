@@ -9,6 +9,8 @@
     2. Isso retorna um token, insira-o como um header nos requests dos testes 3 e 4 chamado Authorization, com Bearer escrito na frente.
       Ex:
         Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiZ2FicmllbCIsImlhdCI6MTc2MTc0NDIzNywiZXhwIjoxNzYxNzQ3ODM3fQ.2Voiq8TI_8Vy6jcsjkw5JkKw5umJFmB3ZCSP7waxozU
+
+    O arquivo "grupo_requests.postman_collection.json" consiste no meu grupo de requests do Postman em formato de json. Esse json pode ser importado no Postman para que não seja preciso configurar cada request manualmente.  
 */
 
 import data from "../fakeData.js";

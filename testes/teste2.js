@@ -3,7 +3,7 @@
       2. Adicionei a validação se os campos foram preenchidos;
       3. Determinei que o id do user adicionado seria o id do último + 1.
       4. Para o teste 6, também fiz com que fosse possível adicionar uma senha para que se possa logar com esse usuário, mas a senha é um campo opcional.
-  */
+*/
 
 import data from "../fakeData.js";
 
