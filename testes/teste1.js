@@ -1,4 +1,5 @@
 import data from "../fakeData.js";
+import accessList from "../accessCounter.js";
 
 /* Modificações:
     1. Substituição do declarador de variável obsoleto 'var' pelo indicado 'const'. O mesmo foi feito nas páginas seguintes;
@@ -10,7 +11,27 @@ export function getUser(req, res, next) {
   const name = req.query.name;
   const user = data.find((u) => u.name === name);
 
-  if (user) return res.status(200).json({ message: user });
+  if (user) {
+    const indexInTheAccessList = accessList.findIndex((u) => u.id === user.id);
+
+    if (indexInTheAccessList !== -1) {
+      const accessCount = accessList[indexInTheAccessList].count;
+
+      accessList[indexInTheAccessList] = {
+        id: user.id,
+        name: user.name,
+        count: accessCount + 1,
+      };
+    } else {
+      accessList.push({
+        id: user.id,
+        name: user.name,
+        count: 1,
+      });
+    }
+
+    return res.status(200).json({ message: user });
+  }
 
   res.status(404).send({ message: "Usuário não encontrado" });
 }
