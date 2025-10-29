@@ -17,5 +17,5 @@ export default function (req, res) {
   if (name) data[index].name = name;
   if (job) data[index].job = job;
 
-  res.status(200).json({ message: `User updated successfully` });
+  res.status(200).json({ message: `Usuário atualizado com sucesso` });
 }

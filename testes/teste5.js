@@ -1,3 +1,7 @@
+/*
+  Optei por fazer com que somente os GETs por nome acrescentassem uma visita ao user, e não o GET de todos os usuários
+*/
+
 import accessList from "../accessCounter.js";
 
 export default function (req, res) {
